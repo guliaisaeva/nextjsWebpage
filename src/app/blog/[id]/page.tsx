@@ -40,7 +40,17 @@ function BlogPost() {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi enim
           debitis voluptas molestias. Natus accusantium delectus dolores atque
           earum cumque praesentium pariatur repellendus iusto eligendi porro ex,
-          consequuntur eius odio!
+          consequuntur eius odio! Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. Ducimus eveniet vel ipsa dolore culpa molestiae
+          nihil provident esse, deserunt suscipit accusamus delectus adipisci id
+          corporis soluta sit, optio voluptatibus at.Lorem30 Lorem ipsum, dolor
+          sit amet consectetur adipisicing elit. Sed non beatae quae voluptatum
+          minus, unde consequuntur ipsam temporibus molestiae iusto autem,
+          doloremque, eos a alias tenetur vitae adipisci dicta itaque? lorem{" "}
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus
+          hic natus ipsam id adipisci eligendi eaque nobis. Ea fugiat, cumque
+          dolores consectetur quam voluptatem, velit repellat, optio sapiente
+          ullam debitis!{" "}
         </p>
       </div>
     </div>
