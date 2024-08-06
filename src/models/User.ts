@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
+import  mongoose, { Schema } from "mongoose";
 
-const { Schema } = mongoose;
-
+// 
 const userSchema = new Schema(
   {
     name: {
@@ -23,4 +22,4 @@ const userSchema = new Schema(
 );
 
 //If the User collection does not exist create a new one.
-export default mongoose.models.User || mongoose.model("User", userSchema);
+export default  mongoose.model("User", userSchema);

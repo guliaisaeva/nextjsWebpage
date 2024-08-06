@@ -5,10 +5,13 @@ import Post from "@/models/Post";
 export const GET = async () => {
   try {
     await connect();
-    const posts = await Post.find().lean();
-    return NextResponse.json(posts, { status: 200 });
+    const posts = await Post.find();
+    return new NextResponse(JSON.stringify(posts), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Database query error:", error);
-    return NextResponse.json({ error: "Database Error!" }, { status: 500 });
+    return new NextResponse("Database Error!", { status: 500 });
   }
 };
