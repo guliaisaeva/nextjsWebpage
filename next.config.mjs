@@ -15,8 +15,12 @@ const nextConfig = {
           ],
     },
     env: {
-        MONGO_URI: "mongodb+srv://guliadev:guliadev@cluster0.mwnpa4c.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0", 
-      },
+    MONGO_URI: process.env.MONGO_URI,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    },
 };
 
 export default nextConfig;
