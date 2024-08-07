@@ -38,8 +38,7 @@ const handler = NextAuth({
               user.password
             );
             if (isPasswordCorrect) {
-              // Return user object with type assertion
-              // Convert to a compatible user type
+             
               return {
                 id: user._id.toString(),
                 name: user.name,
