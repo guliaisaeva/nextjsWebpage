@@ -13,6 +13,11 @@ const nextConfig = {
               pathname: '/**',
             },
           ],
+<<<<<<< HEAD
+=======
+         
+    },
+>>>>>>> 90b9b0c (add register and login)
 
     },
 };
