@@ -1,22 +1,19 @@
 import NextAuth from "next-auth";
+import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import User from "@/models/User";
 import connect from "@/app/utils/db";
-import User, { IUser } from "@/models/User";
 import bcrypt from "bcryptjs";
-type AuthUser = {
+
+interface User {
   id: string;
-  name: string;
   email: string;
-};
+  name?: string;
+}
 
 const handler = NextAuth({
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-
     CredentialsProvider({
       id: "credentials",
       name: "Credentials",
@@ -26,36 +23,41 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         await connect();
-        try {
-          // Fetch the user and assert it as `IUser`
-          const user = (await User.findOne({
-            email: credentials?.email,
-          })) as IUser | null;
 
-          if (user && credentials?.password) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Missing credentials");
+        }
+        try {
+          const user = await User.findOne({
+            email: credentials.email,
+          });
+
+          if (user) {
             const isPasswordCorrect = await bcrypt.compare(
               credentials.password,
               user.password
             );
+
             if (isPasswordCorrect) {
-             
-              return {
-                id: user._id.toString(),
-                name: user.name,
-                email: user.email,
-              } as AuthUser;
+              return user;
             } else {
               throw new Error("Wrong Credentials!");
             }
           } else {
             throw new Error("User not found!");
           }
-        } catch (err) {
-          throw new Error(
-            err instanceof Error ? err.message : "An error occurred"
-          );
+        } catch (err: any) {
+          throw new Error(err);
         }
       },
+    }),
+    // GithubProvider({
+    //   clientId: process.env.GITHUB_ID,
+    //   clientSecret: process.env.GITHUB_SECRET,
+    // }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
   pages: {

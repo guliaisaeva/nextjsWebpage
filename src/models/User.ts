@@ -12,26 +12,34 @@
 //   password: { type: String, required: true },
 // });
 
-// const User: Model<IUser> =
+// const UserModel: Model<IUser> =
 //   mongoose.models.User || mongoose.model<IUser>("User", userSchema);
 
-// export default User;
+// export default UserModel;
 
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose from "mongoose";
 
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  password: string;
-}
+const { Schema } = mongoose;
 
-const userSchema = new Schema<IUser>({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-const UserModel: Model<IUser> =
-  mongoose.models.User || mongoose.model<IUser>("User", userSchema);
-
-export default UserModel;
+//If the User collection does not exist create a new one.
+export default mongoose.models.User || mongoose.model("User", userSchema);
