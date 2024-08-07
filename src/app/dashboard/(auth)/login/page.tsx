@@ -1,9 +1,34 @@
-import React from 'react'
+"use client";
+import React from "react";
+import styles from "./page.module.css";
+import { signIn } from "next-auth/react";
 
-function  Login() {
+function Login() {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+    signIn("credentials", { email, password });
+  };
   return (
-    <div> Login</div>
-  )
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          type="text"
+          placeholder="Email"
+          required
+          className={styles.input}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          className={styles.input}
+        />
+        <button className={styles.button}>Login</button>
+      </form>
+      <button onClick={() => signIn("google")}>Login with Google</button>
+    </div>
+  );
 }
-
-export default  Login
+export default Login;

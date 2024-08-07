@@ -13,7 +13,7 @@ const defaultValue: ThemeContextType = {
 };
 export const ThemeContext = createContext<ThemeContextType>(defaultValue);
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider = ({ children }: any) => {
   const [mode, setMode] = useState("dark");
 
   const toggle = () => {
