@@ -14,9 +14,7 @@ const nextConfig = {
             },
           ],
     },
-    env: {
-        MONGO_URI: "mongodb+srv://guliadev:guliadev@cluster0.mwnpa4c.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0", 
-      },
+
 };
 
 export default nextConfig;
