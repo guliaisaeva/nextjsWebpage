@@ -27,7 +27,6 @@ const handler = NextAuth({
       async authorize(credentials) {
         await connect();
         try {
-          // Fetch the user and assert it as `IUser`
           const user = (await User.findOne({
             email: credentials?.email,
           })) as IUser | null;
