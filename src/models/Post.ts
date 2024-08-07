@@ -1,5 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 
+// interface IPost  {
+//   title: string;
+//   desc: string;
+//   image: string;
+//   content: string;
+//   username: string;
+// }
+
 const postSchema = new Schema(
   {
     title: { type: String, required: true },

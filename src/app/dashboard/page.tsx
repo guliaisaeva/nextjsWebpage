@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -23,18 +22,14 @@ function Dashboard() {
   //     setIsLoading(false);
   //   };
   // }, []);
+  type FetcherArgs = [RequestInfo, RequestInit?];
 
-  const session = useSession();
-  console.log(session);
-
-  // type FetcherArgs = [RequestInfo, RequestInit?];
-
-  // const fetcher = (...args: FetcherArgs) =>
-  //   fetch(...args).then((res) => res.json());
-  // const { data, error, isLoading } = useSWR(
-  //   "https://jsonplaceholder.typicode.com/posts",
-  //   fetcher
-  // );
+  const fetcher = (...args: FetcherArgs) =>
+    fetch(...args).then((res) => res.json());
+  const { data, error, isLoading } = useSWR(
+    "https://jsonplaceholder.typicode.com/posts",
+    fetcher
+  );
 
   return <div>Dashboard</div>;
 }
