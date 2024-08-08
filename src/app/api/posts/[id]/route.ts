@@ -42,7 +42,7 @@ import Post from "@/models/Post";
 
 export const GET = async (request: Request) => {
   const url = new URL(request.url);
-  const id = url.pathname.split("/").pop(); // Extract the ID from the URL
+  const id = url.pathname.split("/").pop(); 
 
   try {
     await connect();
