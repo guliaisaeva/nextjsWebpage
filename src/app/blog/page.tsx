@@ -4,15 +4,22 @@ import Link from "next/link";
 import Image from "next/image";
 
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/posts", {
-    cache: "no-store",
-  });
-  console.log("Response Status:", res.status);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+  try {
+    const res = await fetch("http://localhost:3000/api/posts");
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+    }
+    const data = await res.json();
+    return data.map((post: { img: string }) => ({
+      ...post,
+      img: post.img.startsWith("http")
+        ? post.img
+        : "/path/to/default-image.jpg",
+    }));
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error;
   }
-
-  return res.json();
 }
 
 const Blog = async () => {

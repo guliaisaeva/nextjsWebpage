@@ -1,10 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSession } from "next-auth/react";
 import styles from "./page.module.css";
 import Image from "next/image";
-
 import useSWR from "swr";
 
 function Dashboard() {
@@ -69,22 +68,20 @@ function Dashboard() {
     return (
       <div className={styles.container}>
         <div className={styles.posts}>
-          {isLoading
-            ? "loading"
-            : data?.map((post: any) => (
-                <div className={styles.post} key={post._id}>
-                  <div className={styles.imgContainer}>
-                    <Image src={post.img} alt="" width={200} height={100} />
-                  </div>
-                  <h2 className={styles.postTitle}>{post.title}</h2>
-                  <span
-                    className={styles.delete}
-                    onClick={() => handleDelete(post._id)}
-                  >
-                    X
-                  </span>
-                </div>
-              ))}
+          {data?.map((item: any) => (
+            <div className={styles.post} key={item._id}>
+              <div className={styles.imgContainer}>
+                <Image src={item.img} alt="" width={200} height={100} />
+              </div>
+              <h2 className={styles.postTitle}>{item.title}</h2>
+              <span
+                className={styles.delete}
+                onClick={() => handleDelete(item._id)}
+              >
+                X
+              </span>
+            </div>
+          ))}
         </div>
         <form className={styles.new} onSubmit={handleSubmit}>
           <h1>Add New Post</h1>
